@@ -2,9 +2,9 @@ use serde::{Serialize, Serializer};
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
-    #[error(
-        "Please run the open_in_memory or open_in_path method first to establish a connection to the database."
-    )]
+    #[error(transparent)]
+    Io(#[from] std::io::Error),
+    #[error("Call open_in_memory or open_in_path first to establish a connection.")]
     Connection(),
     #[error("Database error: {0}")]
     Database(String),

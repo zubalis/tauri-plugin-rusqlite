@@ -8,6 +8,7 @@ This plugin enables access to an SQLite database within Tauri applications. It i
 - Execute the following command in your terminal:
 
 ``` bash
+npm i
 npm run tauri dev
 ```
 

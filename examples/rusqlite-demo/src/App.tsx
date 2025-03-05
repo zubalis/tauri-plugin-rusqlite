@@ -4,6 +4,7 @@ import "./App.css";
 import Rusqlite from 'tauri-plugin-rusqlite-api'
 import { rusqliteClose, rusqliteOpenInMemory, rusqliteOpenInPath } from "./Database";
 import { appDataDir, resolve } from "@tauri-apps/api/path";
+import { exists, mkdir } from "@tauri-apps/plugin-fs";
 
 function App() {
   const [id, setId] = useState(-1);
@@ -32,6 +33,9 @@ function App() {
   const openInPath = async () => {
     try {
       const baseFolder = await appDataDir();
+      if (!await exists(baseFolder)) {
+        mkdir(baseFolder);
+      }
       const databasePath = await resolve(baseFolder, "test.db");
       setOpenDatabaseMessage(databasePath);
       const rusqlite = await rusqliteOpenInPath(databasePath);

@@ -1,3 +1,7 @@
+use tauri::{
+  command, plugin::{Builder, TauriPlugin}, Manager, Runtime, State
+};
+
 use crate::types::{Result, ResultList};
 use commands::{
     batch::execute_batch, migration::execute_migration, select::execute_select,
@@ -7,11 +11,6 @@ use error::Error;
 use rusqlite::{Connection, OpenFlags};
 use serde_json::Value as JsonValue;
 use std::{collections::HashMap, sync::Mutex};
-use tauri::{
-    command,
-    plugin::{Builder, TauriPlugin},
-    Manager, Runtime, State,
-};
 use types::Migrations;
 
 mod commands;
@@ -137,7 +136,7 @@ pub fn init<R: Runtime>() -> TauriPlugin<R> {
             batch,
             close
         ])
-        .setup(|app| {
+        .setup(|app, _api| {
             app.manage(ConfigState::default());
             Ok(())
         })

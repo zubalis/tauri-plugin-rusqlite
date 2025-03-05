@@ -6,19 +6,19 @@ authors = ["you"]
 license = ""
 repository = ""
 edition = "2021"
+rust-version = "1.77.2"
+
+[lib]
+name = "tauri_app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.5", features = [] }
+tauri-build = { version = "2.0.5", default-features = false , features = [] }
 
 [dependencies]
-tauri = { version = "1.5", features = [ "path-all", "fs-all", "shell-open"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
+tauri = { version = "2.3.1", features = [] }
+tauri-plugin-fs = "2"
 tauri-plugin-rusqlite = { path = "../../../" }
-
-[features]
-# this feature is used for production builds or when `devPath` points to the filesystem
-# DO NOT REMOVE!!
-custom-protocol = ["tauri/custom-protocol"]
+serde_json = "1.0"

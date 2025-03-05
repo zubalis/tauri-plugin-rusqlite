@@ -1,0 +1,11 @@
+[default]
+description = "Default permissions for the plugin"
+permissions = [
+    "allow-open-in-memory",
+    "allow-open-in-path",
+    "allow-migration",
+    "allow-update",
+    "allow-select",
+    "allow-batch",
+    "allow-close"
+]

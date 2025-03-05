@@ -1,0 +1,1 @@
+{"default":{"identifier":"default","description":"enables the default permissions","local":true,"windows":["main"],"permissions":["core:default","rusqlite:default","fs:default",{"identifier":"fs:scope","allow":[{"path":"$APPDATA"},{"path":"$APPDATA/**"}]}]}}
