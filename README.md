@@ -2,12 +2,15 @@
 
 This plugin enables access to an SQLite database within Tauri applications. It is inspired by the [tauri-plugin-sqlite](https://github.com/lzdyes/tauri-plugin-sqlite) plugin but is based on [rusqlite](https://github.com/rusqlite/rusqlite).
 
+The current version supports Tauri 2.0. To use this plugin with Tauri 1.x, use the 1.4.4 release of this plugin.
+
 ## Example
 
 - Full example at: <https://github.com/kessdev/tauri-plugin-rusqlite/tree/main/examples/rusqlite-demo>
 - Execute the following command in your terminal:
 
 ``` bash
+cd examples/rusqlite-demo
 npm i
 npm run tauri dev
 ```
@@ -62,6 +65,8 @@ or
 ``` ts
 const database = await Rusqlite.openInPath("./folder/test.db");
 ```
+
+To use `openInPath` you will need permission to read/write to the database path (see example code). If the file does not exist at the path then an empty sqlite db is created. (Note: folders will not be created, so check that the folder exists before calling `openInPath`.)
 
 ### Init database
 
