@@ -1,7 +1,7 @@
 {
-  "productName": "tauri-app",
+  "productName": "rusqlite-demo",
   "version": "0.1.0",
-  "identifier": "com.tauri.dev",
+  "identifier": "dev.kess.rusqlite-demo",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build",
