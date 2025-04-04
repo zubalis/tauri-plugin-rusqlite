@@ -13,13 +13,13 @@ use serde_json::Value as JsonValue;
 use std::{collections::HashMap, sync::Mutex};
 use types::Migrations;
 
-mod commands;
+pub mod commands;
 mod common;
 mod error;
 mod types;
 
 #[derive(Default)]
-struct ConfigState(Mutex<HashMap<String, Connection>>);
+pub struct ConfigState(pub Mutex<HashMap<String, Connection>>);
 
 #[command]
 async fn open_in_memory(state: State<'_, ConfigState>, name: String) -> Result<()> {
@@ -122,6 +122,17 @@ async fn close(state: State<'_, ConfigState>, name: String) -> Result<()> {
         .close()
         .map_err(|(_, error)| Error::ClosingConnection(error.to_string()))?;
     Ok(())
+}
+
+/// Extensions to [`tauri::App`], [`tauri::AppHandle`], [`tauri::WebviewWindow`], [`tauri::Webview`] and [`tauri::Window`] to access the clipboard APIs.
+pub trait RusqliteExt<R: Runtime> {
+    fn rusqlite(&self) -> &ConfigState;
+}
+
+impl<R: Runtime, T: Manager<R>> crate::RusqliteExt<R> for T {
+    fn rusqlite(&self) -> &ConfigState {
+        self.state::<ConfigState>().inner()
+    }
 }
 
 /// Initializes the plugin.
